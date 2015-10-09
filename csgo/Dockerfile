@@ -6,14 +6,16 @@ ENV CSGO_VERSION LATEST
 
 RUN apt-get update &&\
     apt-get -qqy install bsdmainutils wget tmux mailutils postfix lib32gcc1 libstdc++6 &&\
-    useradd csgoserver 
+    groupadd csgoserver && useradd -m -g csgoserver 
 
-RUN mkdir -p /opt/csgo && chown csgoserver:csgoserver /opt/csgo
-    
-RUN su - csgoserver -c "cd /opt/csgo &&\
-    wget http://gameservermanagers.com/dl/csgoserver &&\
-    chmod +x csgoserver &&\
-    ./csgoserver auto-install"
+RUN su - csgoserver -c "\
+if [ -d /home/csgoserver ]; then \
+wget http://gameservermanagers.com/dl/csgoserver &&\
+chmod +x csgoserver &&\
+./csgoserver auto-install;\
+else exit; \
+fi\
+"
 
 ADD start_csgo.sh /start-csgo
 
