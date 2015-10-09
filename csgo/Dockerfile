@@ -5,15 +5,15 @@ MAINTAINER xiiisins
 ENV CSGO_VERSION LATEST
 
 RUN apt-get update &&\
-    apt-get -qqy install bsdmainutils tmux mailutils postfix lib32gcc1 libstdc++6
-    
-RUN useradd csgoserver &&\
-    su - csgoserver
+    apt-get -qqy install bsdmainutils wget tmux mailutils postfix lib32gcc1 libstdc++6 &&\
+    useradd csgoserver 
 
-RUN mkdir -p /opt/csgo && cd /opt/csgo &&\
+RUN mkdir -p /opt/csgo && chown csgoserver:csgoserver /opt/csgo
+    
+RUN su - csgoserver -c "cd /opt/csgo &&\
     wget http://gameservermanagers.com/dl/csgoserver &&\
     chmod +x csgoserver &&\
-    ./csgoserver install
+    ./csgoserver auto-install"
 
 ADD start_csgo.sh /start-csgo
 

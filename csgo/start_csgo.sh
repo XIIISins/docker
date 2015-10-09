@@ -9,6 +9,8 @@ log2=`find /opt/csgo/serverfiles/csgo/logs -maxdepth 1 -type f -printf "%T@ %p\n
 
 if [ $USER != $user ]; then
     su - $user
+else
+    exit
 fi
 
 $csgoserver start
