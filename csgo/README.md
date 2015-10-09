@@ -1,0 +1,7 @@
+CS:GO Container
+====
+
+[WIP]
+CS:GO Docker container
+
+WARNING THIS CONTAINER WILL BE ATLEAST 12GB
