@@ -6,7 +6,7 @@ ENV CSGO_VERSION LATEST
 
 RUN apt-get update &&\
     apt-get -qqy install bsdmainutils wget tmux mailutils postfix lib32gcc1 libstdc++6 &&\
-    groupadd csgoserver && useradd -m -g csgoserver 
+    groupadd csgoserver && useradd -m -g csgoserver csgoserver
 
 RUN su - csgoserver -c "\
 if [ -d /home/csgoserver ]; then \
